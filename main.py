@@ -22,44 +22,6 @@ if not api_key:
 client = genai.Client(api_key=api_key)
 model_name = "gemini-2.5-flash"
 
-'''
-messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
-
-#Processing the prompt and generating a response
-response = client.models.generate_content(
-    model=model_name,
-    contents=messages,
-    config=types.GenerateContentConfig(
-        tools=[available_functions],
-        system_instruction=system_prompt
-        ),
-)
-
-if args.verbose:
-    prompt_tokens = response.usage_metadata.prompt_token_count
-    response_tokens = response.usage_metadata.candidates_token_count
-    print(f"User prompt: {args.user_prompt}")
-    print(f"Prompt tokens: {prompt_tokens}")
-    print(f"Response tokens: {response_tokens}")
-
-if response.function_calls:
-    func_results_list = []
-    for function_call in response.function_calls:
-        function_call_result = call_function(function_call, verbose=args.verbose)
-        if not function_call_result.parts:
-            raise Exception("Error: function_call_result.parts should be non-empty")
-        if not function_call_result.parts[0]:
-            raise Exception("Error: function_call_result.parts[0] should not be None")
-        if not function_call_result.parts[0].function_response.response:
-            raise Exception("Error: function_call_result.parts[0].function_response.response should not be None")
-        func_results_list.append(function_call_result.parts[0].function_response.response)
-        if args.verbose:
-            print(f"-> {function_call_result.parts[0].function_response.response}")
-
-else:
-    print(response.text)
-'''
-
 def generate_content():
     messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
     func_results_list = []
